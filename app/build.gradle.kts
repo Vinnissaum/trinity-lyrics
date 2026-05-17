@@ -22,6 +22,23 @@ tasks.withType<Test> {
 
 compose.desktop {
     application {
-        mainClass = "dev.trinitylabs.lyrics.app.MainKt"
+        mainClass = "dev.trinitychurch.lyrics.app.MainKt"
+        nativeDistributions {
+            targetFormats(org.jetbrains.compose.desktop.application.dsl.TargetFormat.Msi)
+            packageName = "Trinity Lyrics"
+            packageVersion = "0.1.0"
+            description = "Apresentação de letras para igrejas"
+            copyright = "© 2026 Trinity Labs"
+            vendor = "Trinity Labs"
+
+            windows {
+                menuGroup = "Trinity Lyrics"
+                // upgradeUuid must never change after first release — identifies this product for MSI upgrades
+                upgradeUuid = "F3A4B5C6-D7E8-4F9A-B0C1-D2E3F4A5B6C7"
+                dirChooser = true
+                perUserInstall = false
+                shortcut = true
+            }
+        }
     }
 }
