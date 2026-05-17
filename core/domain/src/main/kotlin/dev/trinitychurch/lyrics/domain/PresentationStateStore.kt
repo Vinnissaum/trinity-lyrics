@@ -1,4 +1,4 @@
-package dev.trinitylabs.lyrics.domain
+package dev.trinitychurch.lyrics.domain
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

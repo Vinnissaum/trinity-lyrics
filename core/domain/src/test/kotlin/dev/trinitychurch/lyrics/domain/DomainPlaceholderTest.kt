@@ -1,4 +1,4 @@
-package dev.trinitylabs.lyrics.domain
+package dev.trinitychurch.lyrics.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe

@@ -6,7 +6,7 @@ plugins {
 sqldelight {
     databases {
         create("TrinityLyricsDatabase") {
-            packageName.set("dev.trinitylabs.lyrics.db")
+            packageName.set("dev.trinitychurch.lyrics.db")
         }
     }
 }

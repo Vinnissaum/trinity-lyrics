@@ -7,6 +7,6 @@ plugins {
 }
 
 allprojects {
-    group = "dev.trinitylabs.lyrics"
+    group = "dev.trinitychurch.lyrics"
     version = "0.1.0-SNAPSHOT"
 }

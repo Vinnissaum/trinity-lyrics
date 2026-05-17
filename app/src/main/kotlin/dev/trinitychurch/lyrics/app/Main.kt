@@ -1,4 +1,4 @@
-package dev.trinitylabs.lyrics.app
+package dev.trinitychurch.lyrics.app
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import dev.trinitylabs.lyrics.app.di.AppModule
-import dev.trinitylabs.lyrics.domain.PresentationStateStore
+import dev.trinitychurch.lyrics.app.di.AppModule
+import dev.trinitychurch.lyrics.domain.PresentationStateStore
 import org.koin.compose.koinInject
 import org.koin.core.context.startKoin
 
