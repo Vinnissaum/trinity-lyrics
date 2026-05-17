@@ -5,6 +5,11 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":core:domain"))
+    implementation(compose.runtime)
+    implementation(compose.foundation)
+    implementation(compose.material)
+
     testImplementation(libs.kotest.runner.junit5)
     testImplementation(libs.kotest.assertions.core)
 }

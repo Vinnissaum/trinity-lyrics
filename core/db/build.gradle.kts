@@ -12,8 +12,10 @@ sqldelight {
 }
 
 dependencies {
+    implementation(project(":core:domain"))
     implementation(libs.sqldelight.driver.sqlite)
     implementation(libs.sqldelight.coroutines)
+    implementation(libs.kotlinx.coroutines.core)
 
     testImplementation(libs.kotest.runner.junit5)
     testImplementation(libs.kotest.assertions.core)

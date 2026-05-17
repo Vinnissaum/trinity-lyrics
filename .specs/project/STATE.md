@@ -1,7 +1,7 @@
 # Project State — Trinity Lyrics
 
 **Last updated:** 2026-05-17
-**Current phase:** Phase 0 — Skeleton (Specified — ready for execution)
+**Current phase:** Phase 1 — Lyrics MVP (Specified — ready for execution)
 
 ---
 
@@ -67,6 +67,24 @@
 - Rationale: Bundles JVM — users need no Java installed; integrates with Windows Add/Remove Programs; single `.msi` file to distribute
 - Status: Final
 
+**D-012 — Slide navigation: keyboard arrows + Space (like PPT) + click thumbnail**
+- Date: 2026-05-17
+- Decision: Right arrow + Space = advance; Left arrow = previous; B = blank; F = freeze; Esc = exit. Also: clicking any slide thumbnail in the operator console jumps to that slide.
+- Rationale: User explicitly clarified "exactly like PowerPoint" for keyboard nav; thumbnail click is essential for live service recovery (jump without many arrow presses)
+- Status: Final
+
+**D-013 — Holyrics export format is JSON array, not .db or .lyr**
+- Date: 2026-05-17
+- Decision: Parse Holyrics exports as JSON array `[{id, title, artist, lyrics:{paragraphs:[]}}]` using kotlinx.serialization
+- Rationale: Real export file provided by user confirmed JSON format (not SQLite DB as assumed in TDD); all paragraph descriptions are empty in practice → default to "Estrofe N"
+- Status: Final
+
+**D-014 — Freeze uses `frozenDisplayIndex: Int?` not a boolean flag**
+- Date: 2026-05-17
+- Decision: `PresentationState.Lyrics.frozenDisplayIndex: Int?` — null = not frozen; non-null = slide index to show on projection while operator navigates `currentSlideIndex` freely
+- Rationale: Avoids race condition; single field captures both frozen state and frozen slide index; `displaySlideIndex = frozenDisplayIndex ?: currentSlideIndex`
+- Status: Final
+
 **D-011 — App UI language: PT-BR default, EN option; first-run selection screen**
 - Date: 2026-05-17
 - Decision: App ships PT-BR as default language; English is the only other option (Phase 1 scope). Language is chosen on first run via a full-screen picker and persisted in SQLDelight `settings` table. No external i18n library — plain `StringResources` interface with per-locale objects in `:core:ui`.
@@ -77,12 +95,12 @@
 
 ## Blockers
 
-**B-001 — Holyrics export file not yet obtained**
-- What: Cannot implement `HolyricsSongParser` without a real Holyrics `.db` or `.lyr` export file
-- Impact: `:feature:import` HolyricsSongParser cannot be coded; plain-text import is unblocked
-- Action: Request export file from church team before starting `:feature:import`
-- Owner: User (vinicius_lsb@live.com)
-- Status: Open
+**B-001 — Holyrics export format — RESOLVED 2026-05-17**
+- What: Holyrics exports as a JSON array (not `.db` or `.lyr` as assumed in TDD)
+- Format: `[{ id, title, artist, lyrics: { paragraphs: [{number, description, text}] } }]`
+- Resolution: User provided a real 3-song export sample. `HolyricsSongParser` can now be coded.
+- Key mapping: `paragraph.description.ifBlank { "Estrofe N" }` → label; all sections are VERSE type
+- Status: Resolved
 
 ---
 
@@ -90,12 +108,13 @@
 
 - [ ] Create `CLAUDE.md` at repo root with stack, module graph, naming conventions, and common gotchas (see TDD.md §Appendix B)
 - [ ] Validate Skia renderer on target hardware (5-year-old PC) — Phase 0
-- [ ] Obtain Holyrics export file from church team — before `:feature:import`
+- [x] Obtain Holyrics export file from church team — DONE (2026-05-17, JSON format confirmed)
 - [ ] Add app icon `.ico` file and wire into `nativeDistributions` (before first MSI build)
 - [x] Specify Phase 0 Scaffold feature — DONE (2026-05-17)
 - [x] Implement Phase 0 Scaffold (T1–T9) — DONE (2026-05-17)
 - [x] Add MSI `nativeDistributions` to `:app` — DONE (2026-05-17)
 - [x] Specify i18n language selection feature — DONE (2026-05-17)
+- [x] Specify Phase 1 Lyrics MVP — DONE (2026-05-17), 21 tasks, 39 requirements
 
 ---
 

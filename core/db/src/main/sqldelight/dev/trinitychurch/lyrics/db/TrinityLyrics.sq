@@ -1,1 +1,144 @@
--- Phase 0 stub
+CREATE TABLE songs (
+  id           TEXT NOT NULL PRIMARY KEY,
+  title        TEXT NOT NULL,
+  artist       TEXT NOT NULL DEFAULT '',
+  source       TEXT,
+  slide_config TEXT,
+  created_at   INTEGER NOT NULL,
+  updated_at   INTEGER NOT NULL,
+  deleted_at   INTEGER
+);
+
+CREATE TABLE song_sections (
+  id         TEXT NOT NULL PRIMARY KEY,
+  song_id    TEXT NOT NULL REFERENCES songs(id),
+  label      TEXT NOT NULL,
+  type       TEXT NOT NULL,
+  body       TEXT NOT NULL,
+  sort_order INTEGER NOT NULL
+);
+
+CREATE TABLE tags (
+  id    TEXT NOT NULL PRIMARY KEY,
+  name  TEXT NOT NULL,
+  color TEXT
+);
+
+CREATE TABLE song_tags (
+  song_id TEXT NOT NULL REFERENCES songs(id),
+  tag_id  TEXT NOT NULL REFERENCES tags(id),
+  PRIMARY KEY (song_id, tag_id)
+);
+
+CREATE TABLE sets (
+  id           TEXT NOT NULL PRIMARY KEY,
+  name         TEXT NOT NULL,
+  service_date TEXT,
+  created_at   INTEGER NOT NULL,
+  updated_at   INTEGER NOT NULL
+);
+
+CREATE TABLE set_items (
+  id         TEXT NOT NULL PRIMARY KEY,
+  set_id     TEXT NOT NULL REFERENCES sets(id),
+  song_id    TEXT REFERENCES songs(id),
+  sort_order INTEGER NOT NULL
+);
+
+CREATE TABLE settings (
+  key   TEXT NOT NULL PRIMARY KEY,
+  value TEXT NOT NULL
+);
+
+CREATE VIRTUAL TABLE songs_fts USING fts5(
+  song_id UNINDEXED,
+  title,
+  artist,
+  body
+);
+
+-- Song queries
+
+selectAllNonDeleted:
+SELECT * FROM songs WHERE deleted_at IS NULL ORDER BY title ASC;
+
+selectById:
+SELECT * FROM songs WHERE id = :id;
+
+insertSong:
+INSERT INTO songs(id, title, artist, source, slide_config, created_at, updated_at)
+VALUES (:id, :title, :artist, :source, :slideConfig, :createdAt, :updatedAt);
+
+updateSong:
+UPDATE songs SET title = :title, artist = :artist, source = :source,
+  slide_config = :slideConfig, updated_at = :updatedAt
+WHERE id = :id;
+
+softDeleteSong:
+UPDATE songs SET deleted_at = :deletedAt WHERE id = :id;
+
+-- SongSection queries
+
+selectSectionsBySongId:
+SELECT * FROM song_sections WHERE song_id = :songId ORDER BY sort_order ASC;
+
+insertSection:
+INSERT INTO song_sections(id, song_id, label, type, body, sort_order)
+VALUES (:id, :songId, :label, :type, :body, :sortOrder);
+
+updateSection:
+UPDATE song_sections SET label = :label, type = :type, body = :body, sort_order = :sortOrder
+WHERE id = :id;
+
+deleteSection:
+DELETE FROM song_sections WHERE id = :id;
+
+deleteSectionsBySongId:
+DELETE FROM song_sections WHERE song_id = :songId;
+
+-- FTS queries
+
+-- FTS operations (insertFts, deleteFts, search) are executed as raw SQL in SongRepository
+-- because SQLDelight's query compiler does not support the FTS5 MATCH operator.
+
+-- Set queries
+
+selectAllSets:
+SELECT * FROM sets ORDER BY service_date DESC, created_at DESC;
+
+selectSetById:
+SELECT * FROM sets WHERE id = :id;
+
+insertSet:
+INSERT INTO sets(id, name, service_date, created_at, updated_at)
+VALUES (:id, :name, :serviceDate, :createdAt, :updatedAt);
+
+updateSet:
+UPDATE sets SET name = :name, service_date = :serviceDate, updated_at = :updatedAt
+WHERE id = :id;
+
+deleteSet:
+DELETE FROM sets WHERE id = :id;
+
+-- SetItem queries
+
+selectItemsBySetId:
+SELECT * FROM set_items WHERE set_id = :setId ORDER BY sort_order ASC;
+
+insertSetItem:
+INSERT INTO set_items(id, set_id, song_id, sort_order)
+VALUES (:id, :setId, :songId, :sortOrder);
+
+deleteSetItem:
+DELETE FROM set_items WHERE id = :id;
+
+updateSetItemOrder:
+UPDATE set_items SET sort_order = :sortOrder WHERE id = :id;
+
+-- Settings queries
+
+getSetting:
+SELECT value FROM settings WHERE key = :key;
+
+upsertSetting:
+INSERT OR REPLACE INTO settings(key, value) VALUES (:key, :value);
