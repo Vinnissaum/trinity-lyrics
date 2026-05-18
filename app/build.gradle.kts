@@ -18,6 +18,7 @@ dependencies {
     implementation(project(":feature:presentation"))
     implementation(project(":feature:import"))
     implementation(libs.sqldelight.driver.sqlite)
+    runtimeOnly(libs.slf4j.nop)
 
     testImplementation(libs.kotest.runner.junit5)
     testImplementation(libs.kotest.assertions.core)

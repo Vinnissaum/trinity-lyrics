@@ -31,6 +31,7 @@ import dev.trinitychurch.lyrics.presentation.PresentationWindowApp
 import dev.trinitychurch.lyrics.ui.strings.EnStrings
 import dev.trinitychurch.lyrics.ui.strings.LocalStrings
 import dev.trinitychurch.lyrics.ui.strings.PtBrStrings
+import kotlinx.coroutines.runBlocking
 import org.koin.core.context.startKoin
 import java.awt.GraphicsEnvironment
 
@@ -51,23 +52,18 @@ fun main() {
     val setRepository = koin.get<SetRepository>()
     val settings = koin.get<SettingsRepository>()
 
+    runBlocking { localeStore.load() }
+
     application {
-        var localeReady by remember { mutableStateOf(false) }
-        LaunchedEffect(Unit) {
-            localeStore.load()
-            localeReady = true
+        val locale by localeStore.locale.collectAsState()
+        val strings = when (locale) {
+            AppLocale.PT_BR -> PtBrStrings
+            AppLocale.EN -> EnStrings
         }
 
-        if (localeReady) {
-            val locale by localeStore.locale.collectAsState()
-            val strings = when (locale) {
-                AppLocale.PT_BR -> PtBrStrings
-                AppLocale.EN -> EnStrings
-            }
+        var showLanguagePicker by remember { mutableStateOf(localeStore.isFirstRun()) }
 
-            var showLanguagePicker by remember { mutableStateOf(localeStore.isFirstRun()) }
-
-            CompositionLocalProvider(LocalStrings provides strings) {
+        CompositionLocalProvider(LocalStrings provides strings) {
                 if (showLanguagePicker) {
                     Window(
                         title = strings.appName,
@@ -157,7 +153,6 @@ fun main() {
                         }
                     }
                 }
-            }
         }
     }
 }

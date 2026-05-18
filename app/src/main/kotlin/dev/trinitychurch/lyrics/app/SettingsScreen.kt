@@ -19,6 +19,7 @@ import androidx.compose.material.Slider
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -72,7 +73,7 @@ fun SettingsScreen(
                         onClick = onNavigateBack,
                         modifier = Modifier.semantics { testTag = "btn_back" }
                     ) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = strings.back)
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = strings.back)
                     }
                 }
             )
