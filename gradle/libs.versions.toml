@@ -8,6 +8,7 @@ decompose          = "3.1.0"
 vlcj               = "4.8.3"
 compose-webview    = "1.9.40"
 ktor               = "3.0.3"
+reorderable        = "2.4.3"
 kotest             = "5.9.1"
 junit5             = "5.11.3"
 serialization      = "1.7.3"
@@ -33,11 +34,15 @@ compose-webview               = { module = "io.github.kevinnzou:compose-webview-
 ktor-client-core              = { module = "io.ktor:ktor-client-core",                             version.ref = "ktor" }
 ktor-client-okhttp            = { module = "io.ktor:ktor-client-okhttp",                           version.ref = "ktor" }
 
+reorderable                   = { module = "sh.calvin.reorderable:reorderable",                    version.ref = "reorderable" }
+
 kotest-runner-junit5          = { module = "io.kotest:kotest-runner-junit5",                       version.ref = "kotest" }
 kotest-assertions-core        = { module = "io.kotest:kotest-assertions-core",                     version.ref = "kotest" }
 
 junit5-api                    = { module = "org.junit.jupiter:junit-jupiter-api",                  version.ref = "junit5" }
 junit5-engine                 = { module = "org.junit.jupiter:junit-jupiter-engine",               version.ref = "junit5" }
+junit4                        = { module = "junit:junit",                                           version = "4.13.2" }
+junit-vintage-engine          = { module = "org.junit.vintage:junit-vintage-engine",               version.ref = "junit5" }
 
 [plugins]
 kotlin-jvm                    = { id = "org.jetbrains.kotlin.jvm",                                 version.ref = "kotlin" }

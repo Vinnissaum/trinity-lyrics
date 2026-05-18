@@ -7,10 +7,17 @@ plugins {
 dependencies {
     implementation(compose.desktop.currentOs)
     implementation(compose.material)
+    implementation(compose.materialIconsExtended)
     implementation(libs.kotlinx.coroutines.swing)
     implementation(libs.koin.core)
     implementation(libs.koin.compose)
     implementation(project(":core:domain"))
+    implementation(project(":core:db"))
+    implementation(project(":core:ui"))
+    implementation(project(":feature:lyrics"))
+    implementation(project(":feature:presentation"))
+    implementation(project(":feature:import"))
+    implementation(libs.sqldelight.driver.sqlite)
 
     testImplementation(libs.kotest.runner.junit5)
     testImplementation(libs.kotest.assertions.core)

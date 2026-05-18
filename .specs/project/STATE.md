@@ -115,6 +115,8 @@
 - [x] Add MSI `nativeDistributions` to `:app` — DONE (2026-05-17)
 - [x] Specify i18n language selection feature — DONE (2026-05-17)
 - [x] Specify Phase 1 Lyrics MVP — DONE (2026-05-17), 21 tasks, 39 requirements
+- [x] Implement Phase 1 Lyrics MVP (T01–T21) — DONE (2026-05-18); all 21 tasks complete; T16 has 4 UI tests + P1-05 duplicate detection; T17+T21 manual integration checklists pending human run
+- [ ] Run manual integration checklist for T17 (settings screen hardware verification) and T21 (two-window launch, first-run gate, nav flow)
 
 ---
 

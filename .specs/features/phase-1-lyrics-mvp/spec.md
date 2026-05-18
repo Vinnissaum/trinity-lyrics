@@ -2,8 +2,8 @@
 
 **Feature:** Full lyrics presentation pipeline — CRUD, sets, keyboard + click navigation, import  
 **Milestone:** Phase 1 — First real Sunday service  
-**Status:** Specified  
-**Last updated:** 2026-05-17  
+**Status:** Implemented (⚠️ T16 UI tests missing; T17/T21 manual checklists pending)  
+**Last updated:** 2026-05-18  
 **Depends on:** Phase 0 scaffold (DONE), i18n-language-selection spec (DONE — implements L-01..L-09)
 
 ---
@@ -238,45 +238,45 @@ Church AV operators use Holyrics today. New volunteers take weeks to learn it. P
 
 | ID | Story | Description | Status |
 |---|---|---|---|
-| P1-01 | Holyrics Import | Parse JSON file → song list with paragraph mapping | Pending |
-| P1-02 | Holyrics Import | Preview count before confirm | Pending |
-| P1-03 | Holyrics Import | Save with `source="holyrics"` | Pending |
-| P1-04 | Holyrics Import | Empty `description` → "Estrofe N" / "Strophe N" | Pending |
-| P1-05 | Holyrics Import | Duplicate title+artist → warn + skip/overwrite | Pending |
-| P1-06 | Holyrics Import | Malformed JSON → error dialog, no crash | Pending |
-| P1-07 | Holyrics Import | Library refreshes immediately post-import | Pending |
-| P1-08 | Song CRUD | Create song with required title + min 1 section | Pending |
-| P1-09 | Song CRUD | Edit sections in order with drag-to-reorder | Pending |
-| P1-10 | Song CRUD | Soft-delete disappears from library + set search | Pending |
-| P1-11 | Song CRUD | Live slide preview in editor using SlideConfig | Pending |
-| P1-12 | Song CRUD | Section type selector + auto-label | Pending |
-| P1-13 | Song Search | FTS5 search < 100ms, body match included | Pending |
-| P1-14 | Song Search | Clear → all songs shown | Pending |
-| P1-15 | Song Search | Empty result → empty-state message | Pending |
-| P1-16 | Set Builder | Create set with name + optional date | Pending |
-| P1-17 | Set Builder | Add song from library search | Pending |
-| P1-18 | Set Builder | Drag reorder → `sort_order` persists | Pending |
-| P1-19 | Set Builder | Remove item → song stays in library | Pending |
-| P1-20 | Keyboard Nav | Right/Space → advance ≤16ms | Pending |
-| P1-21 | Keyboard Nav | Left → previous ≤16ms | Pending |
-| P1-22 | Keyboard Nav | Last slide + Right → no action | Pending |
-| P1-23 | Keyboard Nav | First slide + Left → no action | Pending |
-| P1-24 | Keyboard Nav | Advance past last slide of song N → first slide of song N+1 | Pending |
-| P1-25 | Keyboard Nav | B key → blank/unblank | Pending |
-| P1-26 | Keyboard Nav | F key → freeze/unfreeze (projection stays, operator navigates) | Pending |
-| P1-27 | Keyboard Nav | Esc → exit presentation | Pending |
-| P1-28 | Click Nav | Thumbnail grid shown for active song | Pending |
-| P1-29 | Click Nav | Click thumbnail → jump (if not frozen) | Pending |
-| P1-30 | Click Nav | Current display slide thumbnail highlighted | Pending |
-| P1-31 | Click Nav | Click during freeze → operator moves, projection frozen | Pending |
-| P1-32 | Projection | Fullscreen lyrics on target monitor, no decorations | Pending |
-| P1-33 | Projection | Slide change ≤16ms (cut only) | Pending |
-| P1-34 | Projection | Blank state → fully black screen | Pending |
-| P1-35 | Plain Text | [Section] headers → SectionType mapping (EN + PT-BR) | Pending |
-| P1-36 | Plain Text | No headers → single VERSE section | Pending |
-| P1-37 | Settings | Monitor list with resolution labels | Pending |
-| P1-38 | Settings | Font size + max lines change → preview updates | Pending |
-| P1-39 | i18n | All requirements from i18n spec (L-01..L-09) | Pending |
+| P1-01 | Holyrics Import | Parse JSON file → song list with paragraph mapping | Done |
+| P1-02 | Holyrics Import | Preview count before confirm | Done |
+| P1-03 | Holyrics Import | Save with `source="holyrics"` | Done |
+| P1-04 | Holyrics Import | Empty `description` → "Estrofe N" / "Strophe N" | Done |
+| P1-05 | Holyrics Import | Duplicate title+artist → warn + skip/overwrite | Done |
+| P1-06 | Holyrics Import | Malformed JSON → error dialog, no crash | Done |
+| P1-07 | Holyrics Import | Library refreshes immediately post-import | Done |
+| P1-08 | Song CRUD | Create song with required title + min 1 section | Done |
+| P1-09 | Song CRUD | Edit sections in order with drag-to-reorder | Done |
+| P1-10 | Song CRUD | Soft-delete disappears from library + set search | Done |
+| P1-11 | Song CRUD | Live slide preview in editor using SlideConfig | Done |
+| P1-12 | Song CRUD | Section type selector + auto-label | Done |
+| P1-13 | Song Search | FTS5 search < 100ms, body match included | Done |
+| P1-14 | Song Search | Clear → all songs shown | Done |
+| P1-15 | Song Search | Empty result → empty-state message | Done |
+| P1-16 | Set Builder | Create set with name + optional date | Done |
+| P1-17 | Set Builder | Add song from library search | Done |
+| P1-18 | Set Builder | Drag reorder → `sort_order` persists | Done |
+| P1-19 | Set Builder | Remove item → song stays in library | Done |
+| P1-20 | Keyboard Nav | Right/Space → advance ≤16ms | Done |
+| P1-21 | Keyboard Nav | Left → previous ≤16ms | Done |
+| P1-22 | Keyboard Nav | Last slide + Right → no action | Done |
+| P1-23 | Keyboard Nav | First slide + Left → no action | Done |
+| P1-24 | Keyboard Nav | Advance past last slide of song N → first slide of song N+1 | Done |
+| P1-25 | Keyboard Nav | B key → blank/unblank | Done |
+| P1-26 | Keyboard Nav | F key → freeze/unfreeze (projection stays, operator navigates) | Done |
+| P1-27 | Keyboard Nav | Esc → exit presentation | Done |
+| P1-28 | Click Nav | Thumbnail grid shown for active song | Done |
+| P1-29 | Click Nav | Click thumbnail → jump (if not frozen) | Done |
+| P1-30 | Click Nav | Current display slide thumbnail highlighted | Done |
+| P1-31 | Click Nav | Click during freeze → operator moves, projection frozen | Done |
+| P1-32 | Projection | Fullscreen lyrics on target monitor, no decorations | Done |
+| P1-33 | Projection | Slide change ≤16ms (cut only) | Done |
+| P1-34 | Projection | Blank state → fully black screen | Done |
+| P1-35 | Plain Text | [Section] headers → SectionType mapping (EN + PT-BR) | Done |
+| P1-36 | Plain Text | No headers → single VERSE section | Done |
+| P1-37 | Settings | Monitor list with resolution labels | Done |
+| P1-38 | Settings | Font size + max lines change → preview updates | Done |
+| P1-39 | i18n | All requirements from i18n spec (L-01..L-09) | Done |
 
 ---
 

@@ -5,6 +5,8 @@ plugins {
 }
 
 dependencies {
+    implementation(compose.runtime)
+
     testImplementation(libs.kotest.runner.junit5)
     testImplementation(libs.kotest.assertions.core)
 }

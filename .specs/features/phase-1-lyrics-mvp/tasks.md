@@ -108,11 +108,11 @@ data class SlideConfig(
 ```
 
 **Done when**:
-- [ ] All 11 files compile with `./gradlew :core:domain:build`
-- [ ] `PresentationState.Lyrics.displaySlideIndex` returns `frozenDisplayIndex` when set, else `currentSlideIndex`
-- [ ] `PresentationState.Lyrics.frozen` returns `true` iff `frozenDisplayIndex != null`
-- [ ] Stub `PresentationStateStore` deleted from `:core:domain`
-- [ ] Gate: `./gradlew :core:domain:build`
+- [x] All 11 files compile with `./gradlew :core:domain:build`
+- [x] `PresentationState.Lyrics.displaySlideIndex` returns `frozenDisplayIndex` when set, else `currentSlideIndex`
+- [x] `PresentationState.Lyrics.frozen` returns `true` iff `frozenDisplayIndex != null`
+- [x] Stub `PresentationStateStore` deleted from `:core:domain`
+- [x] Gate: `./gradlew :core:domain:build`
 
 **Tests**: None (pure data classes — no logic to test)  
 **Gate**: build
@@ -137,10 +137,10 @@ data class SlideConfig(
 - `SettingsQueries`: `get(key: String)`, `upsert(key: String, value: String)`
 
 **Done when**:
-- [ ] `./gradlew generateSqlDelightInterface` succeeds with no errors
-- [ ] Generated `TrinityLyricsDatabase.kt` and all query interfaces are present in `core/db/build/generated/`
-- [ ] All 7 tables + FTS5 virtual table present in schema
-- [ ] Gate: `./gradlew :core:db:generateSqlDelightInterface`
+- [x] `./gradlew generateSqlDelightInterface` succeeds with no errors
+- [x] Generated `TrinityLyricsDatabase.kt` and all query interfaces are present in `core/db/build/generated/`
+- [x] All 7 tables + FTS5 virtual table present in schema
+- [x] Gate: `./gradlew :core:db:generateSqlDelightInterface`
 
 **Tests**: None at this step — DAO integration tests are co-located with T04/T05/T06  
 **Gate**: build
@@ -169,11 +169,11 @@ data class SlideConfig(
 8. Body with blank lines (from Holyrics paragraphs) → blank lines discarded or treated as empty
 
 **Done when**:
-- [ ] All 8+ test cases written before implementation (RED phase confirmed)
-- [ ] `SlideSplitter.split()` passes all tests (GREEN phase)
-- [ ] Gate passes: `./gradlew :feature:presentation:test`
-- [ ] Test count: ≥ 8 tests pass in `SlideSplitterSpec`
-- [ ] No `SlideSplitter` implementation exists before all tests are written
+- [x] All 8+ test cases written before implementation (RED phase confirmed)
+- [x] `SlideSplitter.split()` passes all tests (GREEN phase)
+- [x] Gate passes: `./gradlew :feature:presentation:test`
+- [x] Test count: ≥ 8 tests pass in `SlideSplitterSpec`
+- [x] No `SlideSplitter` implementation exists before all tests are written
 
 **Tests**: Unit  
 **Gate**: `./gradlew :feature:presentation:test`
@@ -204,12 +204,12 @@ class SongRepository(private val db: TrinityLyricsDatabase) {
 **Note**: All DB operations run on `Dispatchers.IO`; `.asFlow()` uses SQLDelight's coroutine extension.
 
 **Done when**:
-- [ ] All methods implemented
-- [ ] Integration test: insert song → `allSongs()` emits it
-- [ ] Integration test: search by body text → song appears in results
-- [ ] Integration test: softDelete → song absent from `allSongs()`, present with `deleted_at` set
-- [ ] Gate: `./gradlew :core:db:test`
-- [ ] Test count: ≥ 5 integration tests pass
+- [x] All methods implemented
+- [x] Integration test: insert song → `allSongs()` emits it
+- [x] Integration test: search by body text → song appears in results
+- [x] Integration test: softDelete → song absent from `allSongs()`, present with `deleted_at` set
+- [x] Gate: `./gradlew :core:db:test`
+- [x] Test count: ≥ 5 integration tests pass
 
 **Tests**: Integration  
 **Gate**: `./gradlew :core:db:test`
@@ -239,11 +239,11 @@ class SetRepository(private val db: TrinityLyricsDatabase) {
 ```
 
 **Done when**:
-- [ ] Integration test: create set + add 3 items → `setById()` emits correct order
-- [ ] Integration test: reorder items → emitted set reflects new sort_order
-- [ ] Integration test: remove item → song remains in songs table
-- [ ] Gate: `./gradlew :core:db:test`
-- [ ] Test count: ≥ 4 integration tests pass
+- [x] Integration test: create set + add 3 items → `setById()` emits correct order
+- [x] Integration test: reorder items → emitted set reflects new sort_order
+- [x] Integration test: remove item → song remains in songs table
+- [x] Gate: `./gradlew :core:db:test`
+- [x] Test count: ≥ 4 integration tests pass
 
 **Tests**: Integration  
 **Gate**: `./gradlew :core:db:test`
@@ -264,11 +264,11 @@ class SetRepository(private val db: TrinityLyricsDatabase) {
 **Interface methods**: `getString(key, default)`, `putString(key, value)`, `getInt(key, default)`, `putInt(key, value)`
 
 **Done when**:
-- [ ] Integration test: `putString("k","v")` → `getString("k", "")` returns "v"
-- [ ] Integration test: `getString("missing", "default")` returns "default"
-- [ ] Integration test: `putInt` → `getInt` round-trip
-- [ ] Gate: `./gradlew :core:db:test`
-- [ ] Test count: ≥ 3 integration tests pass
+- [x] Integration test: `putString("k","v")` → `getString("k", "")` returns "v"
+- [x] Integration test: `getString("missing", "default")` returns "default"
+- [x] Integration test: `putInt` → `getInt` round-trip
+- [x] Gate: `./gradlew :core:db:test`
+- [x] Test count: ≥ 3 integration tests pass
 
 **Tests**: Integration  
 **Gate**: `./gradlew :core:db:test`
@@ -313,11 +313,11 @@ fun clear()        // → Idle
 13. Multi-song set: advance past last slide of song 1 → first slide of song 2
 
 **Done when**:
-- [ ] All 13+ test cases written before implementation
-- [ ] All tests pass
-- [ ] Gate: `./gradlew :feature:presentation:test`
-- [ ] Test count: ≥ 13 tests in `PresentationStateStoreSpec`
-- [ ] Koin module in `AppModule` registers `PresentationStateStore` as `single {}`
+- [x] All 13+ test cases written before implementation
+- [x] All tests pass
+- [x] Gate: `./gradlew :feature:presentation:test`
+- [x] Test count: ≥ 13 tests in `PresentationStateStoreSpec`
+- [x] Koin module in `AppModule` registers `PresentationStateStore` as `single {}`
 
 **Tests**: Unit  
 **Gate**: `./gradlew :feature:presentation:test`
@@ -357,10 +357,10 @@ fun clear()        // → Idle
 9. Malformed JSON → throws a typed exception (not `SerializationException` leaking to caller)
 
 **Done when**:
-- [ ] All 9+ tests written before implementation
-- [ ] Parser correctly handles the 3-song sample from the spec
-- [ ] Gate: `./gradlew :feature:import:test`
-- [ ] Test count: ≥ 9 tests pass
+- [x] All 9+ tests written before implementation
+- [x] Parser correctly handles the 3-song sample from the spec
+- [x] Gate: `./gradlew :feature:import:test`
+- [x] Test count: ≥ 9 tests pass
 
 **Tests**: Unit  
 **Gate**: `./gradlew :feature:import:test`
@@ -399,9 +399,9 @@ fun clear()        // → Idle
 7. Section body lines preserve newlines
 
 **Done when**:
-- [ ] All 7+ tests written before implementation
-- [ ] Gate: `./gradlew :feature:import:test`
-- [ ] Test count: ≥ 7 tests pass in `PlainTextSongParserSpec`
+- [x] All 7+ tests written before implementation
+- [x] Gate: `./gradlew :feature:import:test`
+- [x] Test count: ≥ 7 tests pass in `PlainTextSongParserSpec`
 
 **Tests**: Unit  
 **Gate**: `./gradlew :feature:import:test`
@@ -436,12 +436,12 @@ class LocaleStore(private val settings: SettingsRepository) {
 ```
 
 **Done when**:
-- [ ] Unit test: `load()` with no saved value → `locale.value == PT_BR`
-- [ ] Unit test: `load()` with saved "en" → `locale.value == EN`
-- [ ] Unit test: `setLocale(EN)` → persisted to settings
-- [ ] Unit test: `isFirstRun()` true when key absent, false when present
-- [ ] Gate: `./gradlew :core:domain:test`
-- [ ] Test count: ≥ 4 tests pass
+- [x] Unit test: `load()` with no saved value → `locale.value == PT_BR`
+- [x] Unit test: `load()` with saved "en" → `locale.value == EN`
+- [x] Unit test: `setLocale(EN)` → persisted to settings
+- [x] Unit test: `isFirstRun()` true when key absent, false when present
+- [x] Gate: `./gradlew :core:domain:test`
+- [x] Test count: ≥ 4 tests pass
 
 **Tests**: Unit  
 **Gate**: `./gradlew :core:domain:test`
@@ -474,11 +474,11 @@ class LocaleStore(private val settings: SettingsRepository) {
 - Errors: `fileMalformed, noSectionsInSong, titleRequired`
 
 **Done when**:
-- [ ] `StringResources` interface has properties for all categories above
-- [ ] `PtBrStrings` and `EnStrings` both implement every property
-- [ ] `LocalStrings = compositionLocalOf<StringResources> { PtBrStrings }`
-- [ ] `./gradlew :core:ui:build` passes with no errors
-- [ ] Gate: `./gradlew :core:ui:build`
+- [x] `StringResources` interface has properties for all categories above
+- [x] `PtBrStrings` and `EnStrings` both implement every property
+- [x] `LocalStrings = compositionLocalOf<StringResources> { PtBrStrings }`
+- [x] `./gradlew :core:ui:build` passes with no errors
+- [x] Gate: `./gradlew :core:ui:build`
 
 **Tests**: None (pure string constants — no logic)  
 **Gate**: build
@@ -502,12 +502,12 @@ class LocaleStore(private val settings: SettingsRepository) {
 - Each card: tap → navigate to SongEditScreen; long-press → delete confirm dialog
 
 **Done when**:
-- [ ] UI test: insert 3 songs via repo → library shows all 3
-- [ ] UI test: type search term → list filters to matching songs
-- [ ] UI test: clear search → all songs shown
-- [ ] UI test: soft-deleted song does NOT appear
-- [ ] Gate: `./gradlew :feature:lyrics:test`
-- [ ] Test count: ≥ 4 UI tests pass
+- [x] UI test: insert 3 songs via repo → library shows all 3
+- [x] UI test: type search term → list filters to matching songs
+- [x] UI test: clear search → all songs shown
+- [x] UI test: soft-deleted song does NOT appear
+- [x] Gate: `./gradlew :feature:lyrics:test`
+- [x] Test count: ≥ 4 UI tests pass
 
 **Tests**: UI  
 **Gate**: `./gradlew :feature:lyrics:test`
@@ -530,11 +530,11 @@ class LocaleStore(private val settings: SettingsRepository) {
 - Right panel: live slide preview (`LazyColumn` of `SlidePreviewCard`) — calls `SlideSplitter.split()` on body change, debounced 300ms
 
 **Done when**:
-- [ ] UI test: add 2 sections → both visible in list
-- [ ] UI test: change body text → preview panel shows updated slides
-- [ ] UI test: drag section 1 below section 2 → order swapped in state
-- [ ] Gate: `./gradlew :feature:lyrics:test`
-- [ ] Test count: ≥ 3 UI tests pass
+- [x] UI test: add 2 sections → both visible in list
+- [x] UI test: change body text → preview panel shows updated slides
+- [x] UI test: drag section 1 below section 2 → order swapped in state
+- [x] Gate: `./gradlew :feature:lyrics:test`
+- [x] Test count: ≥ 3 UI tests pass
 
 **Tests**: UI  
 **Gate**: `./gradlew :feature:lyrics:test`
@@ -557,12 +557,12 @@ class LocaleStore(private val settings: SettingsRepository) {
 - Save: validates title non-blank AND at least 1 section → `SongRepository.insert/update`
 
 **Done when**:
-- [ ] UI test: fill title + add section → save → appears in library
-- [ ] UI test: save with empty title → inline error visible, no navigation
-- [ ] UI test: save with no sections → inline error visible
-- [ ] UI test: back with unsaved changes → confirm dialog shown
-- [ ] Gate: `./gradlew :feature:lyrics:test`
-- [ ] Test count: ≥ 4 UI tests pass
+- [x] UI test: fill title + add section → save → appears in library
+- [x] UI test: save with empty title → inline error visible, no navigation
+- [x] UI test: save with no sections → inline error visible
+- [x] UI test: back with unsaved changes → confirm dialog shown
+- [x] Gate: `./gradlew :feature:lyrics:test`
+- [x] Test count: ≥ 4 UI tests pass
 
 **Tests**: UI  
 **Gate**: `./gradlew :feature:lyrics:test`
@@ -586,11 +586,11 @@ class LocaleStore(private val settings: SettingsRepository) {
 - Guard: "Adicione músicas ao culto primeiro" if set empty when start pressed
 
 **Done when**:
-- [ ] UI test: add 3 songs → reorder → set items in new order
-- [ ] UI test: remove song → song still in library (verify via SongRepository)
-- [ ] UI test: start with empty set → guard message shown, no navigation
-- [ ] Gate: `./gradlew :feature:lyrics:test`
-- [ ] Test count: ≥ 3 UI tests pass
+- [x] UI test: add 3 songs → reorder → set items in new order
+- [x] UI test: remove song → song still in library (verify via SongRepository)
+- [x] UI test: start with empty set → guard message shown, no navigation
+- [x] Gate: `./gradlew :feature:lyrics:test`
+- [x] Test count: ≥ 3 UI tests pass
 
 **Tests**: UI  
 **Gate**: `./gradlew :feature:lyrics:test`
@@ -614,11 +614,11 @@ class LocaleStore(private val settings: SettingsRepository) {
 5. Error state: malformed file → error card with message, "Tentar Novamente" button
 
 **Done when**:
-- [ ] UI test (Holyrics path): mock parser returns 3 songs → preview shows "3 músicas encontradas"
-- [ ] UI test: confirm → `SongRepository.insertAll()` called with 3 songs
-- [ ] UI test: parser throws exception → error UI shown (no crash)
-- [ ] Gate: `./gradlew :feature:import:test`
-- [ ] Test count: ≥ 3 UI tests pass
+- [x] UI test (Holyrics path): mock parser returns 3 songs → preview shows "3 músicas encontradas"
+- [x] UI test: confirm → `SongRepository.insertAll()` called with 3 songs
+- [x] UI test: parser throws exception → error UI shown (no crash)
+- [x] Gate: `./gradlew :feature:import:test`
+- [x] Test count: ≥ 3 UI tests pass (4 tests: includes P1-05 duplicate skip/overwrite)
 
 **Tests**: UI  
 **Gate**: `./gradlew :feature:import:test`
@@ -641,11 +641,11 @@ class LocaleStore(private val settings: SettingsRepository) {
 - Changes auto-saved on each interaction (no separate Save button for settings)
 
 **Done when**:
-- [ ] `./gradlew :app:build` passes
+- [x] `./gradlew :app:build` passes
 - [ ] Manual: open settings → monitor list shows all connected monitors with resolution
 - [ ] Manual: change font size → slide preview (visible in editor) reflects new size on next open
 - [ ] Manual: change language to EN → all visible strings switch to English immediately
-- [ ] Gate: `./gradlew :app:build`
+- [x] Gate: `./gradlew :app:build`
 
 **Tests**: None (manual verification; no pure logic to unit-test; UI test skipped — hardware-dependent monitor enumeration)  
 **Gate**: build
@@ -675,11 +675,11 @@ class LocaleStore(private val settings: SettingsRepository) {
 - `onClick` → `store.jumpToSlide(index)`
 
 **Done when**:
-- [ ] UI test: grid with 10 slides → clicking slide 7 calls `jumpToSlide(7)`
-- [ ] UI test: `displaySlideIndex = 3` → thumbnail 3 has highlighted border
-- [ ] UI test: frozen state (`frozenDisplayIndex = 2`, `currentSlideIndex = 5`) → thumbnail 2 highlighted, thumbnail 5 has operator indicator
-- [ ] Gate: `./gradlew :feature:presentation:test`
-- [ ] Test count: ≥ 3 UI tests pass
+- [x] UI test: grid with 10 slides → clicking slide 7 calls `jumpToSlide(7)`
+- [x] UI test: `displaySlideIndex = 3` → thumbnail 3 has highlighted border
+- [x] UI test: frozen state (`frozenDisplayIndex = 2`, `currentSlideIndex = 5`) → thumbnail 2 highlighted, thumbnail 5 has operator indicator
+- [x] Gate: `./gradlew :feature:presentation:test`
+- [x] Test count: ≥ 3 UI tests pass
 
 **Tests**: UI  
 **Gate**: `./gradlew :feature:presentation:test`
@@ -719,11 +719,11 @@ ControlsBar { BlankButton, FreezeButton, ExitButton, "3/15 slides" progress }
 Key events: consume `KEY_DOWN` only.
 
 **Done when**:
-- [ ] UI test: `PresentationState.Lyrics` with 5 slides → current slide panel shows slide 0 text
-- [ ] UI test: `advance()` → current panel updates, previous slide shown at correct index
-- [ ] UI test: Blank button click → `store.toggleBlank()` called
-- [ ] Gate: `./gradlew :feature:presentation:test`
-- [ ] Test count: ≥ 3 UI tests pass
+- [x] UI test: `PresentationState.Lyrics` with 5 slides → current slide panel shows slide 0 text
+- [x] UI test: `advance()` → current panel updates, previous slide shown at correct index
+- [x] UI test: Blank button click → `store.toggleBlank()` called
+- [x] Gate: `./gradlew :feature:presentation:test`
+- [x] Test count: ≥ 3 UI tests pass
 
 **Tests**: UI  
 **Gate**: `./gradlew :feature:presentation:test`
@@ -758,11 +758,11 @@ Box(Modifier.fillMaxSize().background(Color.Black)) {
 - No transitions at MVP (cut — just recompose)
 
 **Done when**:
-- [ ] UI test: `Idle` state → screen fully black
-- [ ] UI test: `Lyrics` state with slide having 2 lines → both lines rendered centered
-- [ ] UI test: `Blank` state → screen fully black (same as Idle visually)
-- [ ] Gate: `./gradlew :feature:presentation:test`
-- [ ] Test count: ≥ 3 UI tests pass
+- [x] UI test: `Idle` state → screen fully black
+- [x] UI test: `Lyrics` state with slide having 2 lines → both lines rendered centered
+- [x] UI test: `Blank` state → screen fully black (same as Idle visually)
+- [x] Gate: `./gradlew :feature:presentation:test`
+- [x] Test count: ≥ 3 UI tests pass
 
 **Tests**: UI  
 **Gate**: `./gradlew :feature:presentation:test`
@@ -828,12 +828,12 @@ SettingsScreen
 ```
 
 **Done when**:
-- [ ] `./gradlew :app:run` launches without crash
+- [x] `./gradlew :app:run` launches without crash
 - [ ] First run: language picker visible; selecting EN → UI in English; selecting PT-BR → UI in Portuguese
 - [ ] Second run (locale persisted): main UI opens directly
 - [ ] LibraryScreen → tap song → SongEditScreen → back → LibraryScreen
 - [ ] SetBuilderScreen → Start Presentation → projection window opens (if second monitor available) OR operator console shows in single-monitor mode
-- [ ] Gate: `./gradlew build`
+- [x] Gate: `./gradlew build`
 
 **Tests**: None (manual integration checklist)  
 **Gate**: `./gradlew build`
@@ -844,27 +844,27 @@ SettingsScreen
 
 | Task | Scope | Status |
 |---|---|---|
-| T01: Domain types | 11 files, all pure data/sealed — zero logic | ⚠️ Many files, but cohesive (all types, no logic); no split needed |
-| T02: SQLDelight schema | 1 .sq file | ✅ Granular |
-| T03: SlideSplitter | 1 pure function + test file | ✅ Granular |
-| T04: SongRepository | 1 class + integration tests | ✅ Granular |
-| T05: SetRepository | 1 class + integration tests | ✅ Granular |
-| T06: SettingsRepository | 2 files (interface + impl) + tests | ✅ Cohesive pair |
-| T07: PresentationStateStore | 1 class + test file | ✅ Granular |
-| T08: HolyricsSongParser | 1 parser + DTOs + test | ✅ Granular |
-| T09: PlainTextSongParser | 1 parser + test | ✅ Granular |
-| T10: AppLocale + LocaleStore | 2 files, tightly coupled domain pair | ✅ Cohesive pair |
-| T11: StringResources | 4 files, 1 conceptual unit (strings infra) | ⚠️ Many files, but cohesive; splitting would create circular deps |
-| T12: LibraryScreen | 1 composable + UI test | ✅ Granular |
-| T13: SectionEditorComponent | 1 composable + UI test | ✅ Granular |
-| T14: SongEditScreen | 1 composable + UI test | ✅ Granular |
-| T15: SetBuilderScreen | 1 composable + UI test | ✅ Granular |
-| T16: ImportWizardScreen | 1 composable + UI test | ✅ Granular |
-| T17: SettingsScreen | 1 composable + manual verification | ✅ Granular |
-| T18: ThumbnailCard + Grid | 2 closely coupled composables | ✅ Cohesive pair (card is only used by grid) |
-| T19: OperatorConsoleApp | 1 composable + inline keyboard handler | ✅ Granular |
-| T20: PresentationWindowApp + LyricsSlideView | 2 composables (window + slide renderer) | ✅ Cohesive pair |
-| T21: Main.kt wiring | 2 files (entry + DI), composition root | ✅ Granular role (wiring) |
+| T01: Domain types | 11 files, all pure data/sealed — zero logic | ✅ DONE |
+| T02: SQLDelight schema | 1 .sq file | ✅ DONE |
+| T03: SlideSplitter | 1 pure function + test file | ✅ DONE |
+| T04: SongRepository | 1 class + integration tests | ✅ DONE |
+| T05: SetRepository | 1 class + integration tests | ✅ DONE |
+| T06: SettingsRepository | 2 files (interface + impl) + tests | ✅ DONE |
+| T07: PresentationStateStore | 1 class + test file | ✅ DONE |
+| T08: HolyricsSongParser | 1 parser + DTOs + test | ✅ DONE |
+| T09: PlainTextSongParser | 1 parser + test | ✅ DONE |
+| T10: AppLocale + LocaleStore | 2 files, tightly coupled domain pair | ✅ DONE |
+| T11: StringResources | 4 files, 1 conceptual unit (strings infra) | ✅ DONE |
+| T12: LibraryScreen | 1 composable + UI test | ✅ DONE |
+| T13: SectionEditorComponent | 1 composable + UI test | ✅ DONE |
+| T14: SongEditScreen | 1 composable + UI test | ✅ DONE |
+| T15: SetBuilderScreen | 1 composable + UI test | ✅ DONE |
+| T16: ImportWizardScreen | 1 composable + UI test | ✅ DONE — 4 UI tests in ImportWizardScreenTest.kt; P1-05 duplicate detection implemented |
+| T17: SettingsScreen | 1 composable + manual verification | ✅ DONE (build-only gate; manual checklist pending human verification) |
+| T18: ThumbnailCard + Grid | 2 closely coupled composables | ✅ DONE |
+| T19: OperatorConsoleApp | 1 composable + inline keyboard handler | ✅ DONE |
+| T20: PresentationWindowApp + LyricsSlideView | 2 composables (window + slide renderer) | ✅ DONE |
+| T21: Main.kt wiring | 2 files (entry + DI), composition root | ✅ DONE (build gate; manual integration checklist pending human verification) |
 
 ---
 
@@ -978,15 +978,15 @@ Phase E (Wiring):
 
 | Req ID | Covered by Task(s) | Status |
 |---|---|---|
-| P1-01..P1-07 | T08, T16, T04 | Pending |
-| P1-08..P1-12 | T01, T13, T14 | Pending |
-| P1-13..P1-15 | T04, T12 | Pending |
-| P1-16..P1-19 | T05, T15 | Pending |
-| P1-20..P1-27 | T07, T19 | Pending |
-| P1-28..P1-31 | T18, T19 | Pending |
-| P1-32..P1-34 | T20 | Pending |
-| P1-35..P1-36 | T09, T16 | Pending |
-| P1-37..P1-38 | T06, T17 | Pending |
-| P1-39 (i18n) | T10, T11, T21 | Pending |
+| P1-01..P1-07 | T08, T16, T04 | Done |
+| P1-08..P1-12 | T01, T13, T14 | Done |
+| P1-13..P1-15 | T04, T12 | Done |
+| P1-16..P1-19 | T05, T15 | Done |
+| P1-20..P1-27 | T07, T19 | Done |
+| P1-28..P1-31 | T18, T19 | Done |
+| P1-32..P1-34 | T20 | Done |
+| P1-35..P1-36 | T09, T16 | Done |
+| P1-37..P1-38 | T06, T17 | Done |
+| P1-39 (i18n) | T10, T11, T21 | Done |
 
 **Coverage**: 39 requirements, 21 tasks, 0 unmapped ✅
